@@ -2,7 +2,7 @@
 
 Sistema de detecção visual com YOLOv8 para identificar automaticamente vagas ocupadas e desocupadas em estacionamentos, utilizando aprendizado profundo com imagens reais e anotações convertidas para o formato YOLO. O projeto busca ser leve, acessível e funcional mesmo com recursos limitados, como CPU.
 
-![Capa do Projeto](images/exemplo.png)
+![Capa do Projeto](/images/exemplo.jpg)
 
 ---
 
@@ -113,7 +113,7 @@ A avaliação dos resultados pode ser feita com base nas métricas do YOLOv8:
 
 > ⚠️ Os resultados refletem o uso de apenas 1.000 imagens para treino, em CPU, o que impacta diretamente na acurácia final. O projeto pode ser facilmente reescalado com mais dados e uso de GPU.
 
-![Resultados](images/confusion_results.png)
+![Resultados](images/results.jpg)
 
 ---
 
@@ -127,8 +127,6 @@ A avaliação dos resultados pode ser feita com base nas métricas do YOLOv8:
 Este projeto mostrou ser viável para uso em soluções reais de monitoramento de estacionamento com recursos limitados, sendo facilmente adaptável e expansível. Mesmo com um subconjunto pequeno do dataset e treinamento em CPU, os resultados se mostraram promissores.
 
 ---
-
-
 
 ## 📚 Referências
 
