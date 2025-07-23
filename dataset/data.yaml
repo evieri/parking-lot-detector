@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['space-empty', 'space-occupied']
+
+roboflow:
+  workspace: aulas-1omb7
+  project: deteccao-de-carros-estacionados
+  version: 3
+  license: MIT
+  url: https://universe.roboflow.com/aulas-1omb7/deteccao-de-carros-estacionados/dataset/3
