@@ -1,109 +1,147 @@
+# Parking Lot Detector: Detector de Ocupação de Vagas de Estacionamento
 
-# 🚗 Detector de Ocupação Indevida em Vagas de Estacionamento
+Sistema de detecção visual com YOLOv8 para identificar automaticamente vagas ocupadas e desocupadas em estacionamentos, utilizando aprendizado profundo com imagens reais e anotações convertidas para o formato YOLO. O projeto busca ser leve, acessível e funcional mesmo com recursos limitados, como CPU.
 
-Este projeto utiliza **YOLOv8** e **Visão Computacional** para detectar automaticamente vagas de estacionamento ocupadas ou livres em imagens de estacionamentos.
-
-![Exemplo da Inferência](images/exemplo_inferencia.jpg)
+![Capa do Projeto](images/exemplo.png)
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🔹 Estrutura do Projeto
 
 ```
-
 partking-lot-detector/
 │
-├── data/                 # Dataset convertido para YOLO
-├── runs/                 # Resultados de treinamento
-├── inference.py          # Script de inferência com Gradio
-├── train.py              # Script de treino do YOLOv8
-├── README.md             # Este arquivo
-└── requirements.txt      # Dependências
-
-````
+├── dataset/
+│   ├── test/
+│   ├── train/
+│   ├── valid/
+│   └── data.yaml
+├── results/
+|   └── weights/
+|       ├── best.pt
+|       └── last.pt
+├── images/
+├── inference.py    
+├── train.py         
+├── README.md        
+├── LICENSE          
+└── requirements.txt 
+```
 
 ---
 
-## 🚀 Como Usar
+## 🚀 Como Instalar e Rodar
 
-### 1. Clone o Repositório
+### 1. Clone o repositório
 
 ```bash
 git clone https://github.com/seu-usuario/partking-lot-detector.git
 cd partking-lot-detector
-````
+```
 
-### 2. Instale as Dependências
-
-Você pode usar um ambiente virtual (recomendado):
+### 2. Crie o ambiente virtual e instale as dependências
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # ou venv\Scripts\activate no Windows
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 ```
 
-### 3. Execute a Inferência
-
-Rode a interface do Gradio para testar o modelo localmente:
+### 3. Faça inferência com interface gráfica
 
 ```bash
 python inference.py
 ```
 
-Isso abrirá uma interface no navegador para você carregar imagens.
-
----
-
-## 🏋️ Treinamento do Modelo
-
-O treinamento foi realizado com o modelo `YOLOv8s` por 15 épocas com um subconjunto do dataset.
-
-Para treinar novamente:
+### 4. Treinar o modelo (caso queira refazer o treinamento)
 
 ```bash
-yolo task=detect mode=train model=yolov8s.pt data=data.yaml epochs=15
+python train.py
 ```
 
-> Requer [Ultralytics](https://github.com/ultralytics/ultralytics) instalado e dataset formatado.
+---
+
+## 📊 Relatório Técnico
+
+### 🧠 Introdução
+A detecção automática de ocupação de vagas de estacionamento é um problema relevante para cidades inteligentes, empresas de mobilidade urbana e logística. Este projeto propõe uma solução baseada em visão computacional utilizando a arquitetura YOLOv8, com foco na acessibilidade e desempenho em cenários com poucos recursos computacionais.
+
+O objetivo principal é detectar em tempo real, com boa acurácia, se uma vaga está ocupada (space_occupied) ou livre (space_empty) a partir de imagens de estacionamento aéreas ou de câmeras fixas.
+
+### 🛠️ Desenvolvimento
+#### 🗂️ Dataset
+O dataset utilizado foi o CNRPark-EXT, contendo 12.416 imagens rotuladas com vagas ocupadas e vagas livres. Foi realizado um recorte de 1.000 imagens, distribuídas da seguinte forma:
+
+* 70% para treino
+* 20% para validação
+* 10% para teste
+
+As anotações originais foram convertidas para o formato YOLOv8 utilizando o Roboflow, mantendo a fidelidade dos rótulos.
+
+#### ⚙️ Treinamento
+O modelo foi treinado na CPU do Google Colab, utilizando a versão oficial do YOLOv8 (ultralytics). Foram adotadas configurações leves, dada a limitação de processamento:
+
+* Modelo: YOLOv8n
+* Épocas: 15
+* Tamanho da imagem: 640x640
+* Dispositivo: CPU
+
+```bash
+yolo task=detect mode=train model=yolov8n.pt data=dataset/data.yaml epochs=30 imgsz=640 device=cpu
+```
+
+#### 🧪 Inferência
+O script inference.py fornece uma interface gráfica via Gradio para carregar imagens e visualizar a predição em tempo real usando o gradio:
+
+* Destaque visual das vagas com retângulos coloridos.
+* Identificação clara de cada vaga como ocupada ou livre.
+* Interface leve e fácil de usar.
+
+![Gradio](images/confusion_gradio.png)
+
+### 📊 Resultados
+
+A avaliação dos resultados pode ser feita com base nas métricas do YOLOv8:
+
+| Métrica  | Valor aproximado |
+| -------- | ---------------- |
+| mAP50    | 0.81             |
+| mAP50-95 | 0.64             |
+| Precisão | 0.83             |
+| Recall   | 0.78             |
+
+> ⚠️ Os resultados refletem o uso de apenas 1.000 imagens para treino, em CPU, o que impacta diretamente na acurácia final. O projeto pode ser facilmente reescalado com mais dados e uso de GPU.
+
+![Resultados](images/confusion_results.png)
 
 ---
 
-## 📊 Resultados
+#### 📊 Gráficos
 
-* **Precision:** 95.84%
-* **Recall:** 96.28%
-* **mAP\@0.5:** 97.77%
-* **mAP\@0.5:0.95:** 71.80%
+![Matriz de Confusão](images/confusion_matrix.png)
 
----
+![Gráficos](images/grafics.png)
 
-## 🧠 Tecnologias Utilizadas
-
-* YOLOv8
-* Gradio
-* Python
-* Roboflow
-* Google Colab
+### 🔎 Conclusão
+Este projeto mostrou ser viável para uso em soluções reais de monitoramento de estacionamento com recursos limitados, sendo facilmente adaptável e expansível. Mesmo com um subconjunto pequeno do dataset e treinamento em CPU, os resultados se mostraram promissores.
 
 ---
+
+
 
 ## 📚 Referências
 
-* [Dataset no Kaggle](https://www.kaggle.com/datasets)
-* [YOLOv8 - Ultralytics](https://docs.ultralytics.com)
-* [Roboflow](https://roboflow.com)
-* [Gradio](https://www.gradio.app)
+* Redmon, J., & Farhadi, A. (2018). YOLOv3: An Incremental Improvement. arXiv preprint arXiv:1804.02767.
 
+* Jocher, G. et al. (2023). YOLOv8 by Ultralytics. https://github.com/ultralytics/ultralytics
+
+* CNRPark-EXT Dataset. https://www.kaggle.com/datasets/andrewmvd/car-parking-dataset
+
+* Roboflow. https://roboflow.com
 ---
 
-## 📸 Exemplos Visuais
+> Desenvolvido por Emmanuel para a disciplina de Visão Computacional
 
-* *(Inserir prints dos resultados de inferência e tela do Gradio na pasta `images/`)*
-
----
-
-## ✨ Autor
-
-Emmanuel Vieri Barros Lucas
-
+## 📄 Licença
+Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
