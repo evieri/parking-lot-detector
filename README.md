@@ -35,7 +35,7 @@ partking-lot-detector/
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/partking-lot-detector.git
+git clone https://github.com/evieri/partking-lot-detector.git
 cd partking-lot-detector
 ```
 
