@@ -35,18 +35,24 @@ partking-lot-detector/
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/evieri/partking-lot-detector.git
+git git@github.com:evieri/parking-lot-detector.git
 cd partking-lot-detector
 ```
 
 ### 2. Crie o ambiente virtual e instale as dependências
 
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
-pip install -r requirements.txt
-```
+| Sistema Operacional  | Comando                               |
+|----------------------|---------------------------------------|
+| **Linux/Mac**        | ```bash                               |
+|                      | python3 -m venv venv                  |
+|                      | source venv/bin/activate              |
+|                      | pip install -r requirements.txt       |
+|                      | ```                                   |
+| **Windows**          | ```bash                               |
+|                      | python -m venv venv                   |
+|                      | venv\Scripts\activate                 |
+|                      | pip install -r requirements.txt       |
+|                      | ```                                   |
 
 ### 3. Faça inferência com interface gráfica
 
@@ -88,7 +94,7 @@ O modelo foi treinado na CPU do Google Colab, utilizando a versão oficial do YO
 * Dispositivo: CPU
 
 ```bash
-yolo task=detect mode=train model=yolov8n.pt data=dataset/data.yaml epochs=30 imgsz=640 device=cpu
+yolo task=detect mode=train model=yolov8n.pt data=dataset/data.yaml epochs=15 imgsz=640 device=cpu
 ```
 
 #### 🧪 Inferência
