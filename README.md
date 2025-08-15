@@ -41,18 +41,24 @@ cd partking-lot-detector
 
 ### 2. Crie o ambiente virtual e instale as dependências
 
-| Sistema Operacional  | Comando                               |
-|----------------------|---------------------------------------|
-| **Linux/Mac**        | ```bash                               |
-|                      | python3 -m venv venv                  |
-|                      | source venv/bin/activate              |
-|                      | pip install -r requirements.txt       |
-|                      | ```                                   |
-| **Windows**          | ```bash                               |
-|                      | python -m venv venv                   |
-|                      | venv\Scripts\activate                 |
-|                      | pip install -r requirements.txt       |
-|                      | ```                                   |
+
+### 2. Crie o ambiente virtual e instale as dependências
+
+#### Linux/Mac
+```bash
+python3 -m venv venv                      # Cria o ambiente virutal
+source venv/bin/activate                  # Ativa o ambiente virtual
+pip install -r requirements.txt           # Instala as bibliotecas necessárias
+```
+#### Windows
+
+```bash
+python -m venv venv                        # Cria o ambiente virutal
+venv\Scripts\activate                      # Ativa o ambiente virtual
+pip install -r requirements.txt            # Instala as bibliotecas necessárias
+```
+
+>⚠️ Sempre usar **python3** no lugar de **python** quando estiver no linux. ⚠️
 
 ### 3. Faça inferência com interface gráfica
 
