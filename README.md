@@ -41,9 +41,6 @@ cd partking-lot-detector
 
 ### 2. Crie o ambiente virtual e instale as dependências
 
-
-### 2. Crie o ambiente virtual e instale as dependências
-
 #### Linux/Mac
 ```bash
 python3 -m venv venv                      # Cria o ambiente virutal
